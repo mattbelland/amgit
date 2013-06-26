@@ -1,7 +1,7 @@
 default:
-  font: Helvetica
+  font: Ubuntu
   bold: "{* Bold}"
-  mono: Andale Mono
+  mono: DejaVu Sans Mono
   prechap: "Chapter "
   postchap: ""
   presect: "Section "

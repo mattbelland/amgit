@@ -29,6 +29,12 @@ On MacOS you can do like this::
 3. DOWNLOAD Calibre for MacOS and install command line tools
 4. `$ makeebooks zh` #will produce a mobi
 
+On Ubuntu you can run something like this:
+
+    $ sudo apt-get install pandoc texlive-xetex
+
+    $ makepdfs en
+
 # Errata
 
 If you see anything that is technically wrong or otherwise in need of
