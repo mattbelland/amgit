@@ -21,7 +21,7 @@ One way to address all of these problems is by using a version control system (V
 *	Some version control systems provide additional services that are not strictly part of VCS, but that help projects run smoothly; for example, a code review system, or an issue tracker (which is like a glorified to-do list).   
 
 
-There are several popular version control systems.  I won't go into their pros and cons.  I am only going to tell you about one of them, git.  To show you how to use git, I will walk you through several common use cases.  But before you can use git, you have to install it.
+There are several popular version control systems.  I won't go into their pros and cons.  I am only going to tell you about one of them, Git.  To show you how to use it, I will walk you through several common use cases.  But before you can use Git, you have to install it.
 
 
 
