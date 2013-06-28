@@ -38,7 +38,7 @@ One way to address all of these problems is by using a version control system (V
 *	It is easy to make copies of a repository, so everyone collaborating on a project can have their own copy.  And you can keep a copy at a remote location, on a professionally-maintained server, so there is very little chance of losing your data.
 *	And when people collaborate on a project, the repository helps them coordinate their work.  They can make and test changes independently, and then move changes from one copy to another in an organized way.
 *	Version controls systems provide servers that give you control over who can read and write your files.  You can make them as secure, or as public, as you want.
-*	Some version control systems provide additional services that are not strictly part of VCS, but that help projects run smoothly; for example, a code review system, or an issue tracker (which is like a glorified to-do list).   
+*	Some version control systems provide additional services that are not strictly part of VCS, but that help projects run smoothly; for example, a wiki for documentation, a code review system, or an issue tracker (which is like a glorified to-do list).   
 
 
 There are several popular version control systems.  I won't go into their pros and cons.  I am only going to tell you about one of them, Git.  To show you how to use it, I will walk you through several common use cases.  But before you can use Git, you have to install it.
