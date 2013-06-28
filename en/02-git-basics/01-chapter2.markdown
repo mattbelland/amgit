@@ -1,3 +1,367 @@
+# Use case 1 #
+
+In each chapter I will walk you through a use case for Git.  In this chapter
+we will make a copy of an existing repo, make a change, and add the
+change back to the repo.  Here are the steps.
+
+1.   Create an account on GitHub.
+2.   Find an existing repository.
+3.   "Fork" the repo, making a copy on GitHub that belongs to you.
+4.   "Clone" the repo, making a copy on your computer.
+5.   Modify one of the files in the repo.
+6.   Commit the change to your local repo.
+7.   Push the change back to your repo on GitHub.
+8.   Ask me to pull the change into my repo.
+
+This might not be the first use case a beginner encounters, but
+(for other reasons) it is a good place to start.
+
+Note: from here on I will sometimes use "repo" as shorthand for "repository".
+I'm not making that up; it is a pretty common term.
+
+
+## Sign up for Github ##
+
+GitHub is a web-based hosting service for Git users.  In general a hosting
+service provides storage space on remote servers, network access, and
+tools and applications for interacting with stored data.  GitHub
+provides storage for Git repositories and tools for interacting with them.
+
+There are other hosting services for Git, but GitHub is one of the
+most popular.  It is so popular that people sometimes get confused, but
+just to be clear:
+
+*    Git is an application that runs on your computer
+and helps you manage repositories.
+*   You can use Git to manage repos stored on your own computer or
+on any computer configured as a Git server.
+*  Anybody can set up and run a Git server.  A company that runs
+Git servers professionally is a Git hosting service.
+*   GitHub is one of many Git hosting services.
+
+Ok, now that we're clear, go to http://github.com.  If you already
+have an account, log in.  Otherwise, create an account.
+
+You can choose any available username you like, but there are a few
+things you might want to think about:
+
+1.   Working on GitHub involves interacting with other people.  They will
+see your username, so choose wisely.
+2.   Some people, like AllenDowney, use their full names, but the most
+common schema seems to be lower-case UNIX-style usernames.  For example,
+Scott Chacon is schacon.
+3.    If you want to be anonymous, you can choose a username unrelated
+to your real name; however,
+4.    Many software engineers use GitHub as part of their professional
+portfolio.  If a potential employer wants to check out your skills, they
+might look at your GitHub repositories.
+
+It is probably a good idea to think of everything you do on GitHub
+as part of your public professional reputation.
+
+
+## Finding a project ##
+
+When you log in, you will see the GitHub home page, which includes
+links to tutorials and updates on your repositories.
+
+You can use the search box in the upper left to find people and projects.
+Type "progit" in the search box and hit enter.  You should see a list
+of projects with "progit" in the name; the first hit is probably
+the original version of this book.
+
+If you search for "AllenDowney", GitHub reports, "We couldn't find any
+repositories matching 'AllenDowney'", but if you hit "Users" in the
+left column, you should find my profile.
+
+If you search for "Blair Walden Project," you should find a project
+named blair-walden-project, which I created for use with this exercise.
+
+The project home page displays the name and description of the
+project, a list of files in the repo, and the contents of README.md,
+which contains more information about the project.  As it explains,
+this repo "is the home of a collaborative writing project, a mash-up
+of Walden and The Blair Which Project, in which it turns out that
+Thoreau wasn't alone in the woods after all."
+
+I initialized this repo with a copy of Henry David Thoreau's "Walden"
+from Project Gutenberg.  We will use this repo to make a modified
+version of "Walden" that includes supernatural elements reminiscent
+of "The Blair Witch Project."
+
+
+## Forking ##
+
+The full name of the project is AllenDowney/blair-walden-project, which
+is a hint that I am the owner of this repo.  You can read the contents,
+and you can even make a copy on your computer, but you cannot modify
+the repo (unless I add you as a collaborator).
+
+However, you can "fork" the repo, which means that you make a copy
+on GitHub that belongs to you.  In the upper-right corner of the project
+home page, press "Fork".
+
+[Add description of the process here.]
+
+When you fork a repository, you get a copy of the files, and also
+a copy of the history, so you can see the changes made before you
+created your fork.
+
+
+## Cloning ##
+
+To get a copy of the repository onto your computer, you "clone" it.
+Like forking, cloning creates a copy of the repo, including its
+history.  The difference is that when you fork someone else's
+repository, the new fork belongs to you.  When you clone a repo,
+the new clone has the same owner as the original.
+
+To clone a repo on GitHub, you need to know its URL.  Go to the
+project home page (of your fork, not mine) and look in the lower
+right.  You should see a text box labelled "HTTPS clone URL".
+Copy the URL in this box (or click the icon to copy it to your
+clipboard).
+
+Then open a terminal, move to a directory where you want to store
+your local copy of the repo, and type:
+
+     $ git clone <URL>
+
+where <URL> is the URL you copied from the project page.  It should
+look like this
+
+     $ git clone <yourusername>/blair-walden-project
+
+If the project is private, you will be prompted for your GitHub
+username and password.  If the project is public, you can clone it
+without authenticating.
+
+If you list the contents of the current folder, you should see a new
+folder with the same name as the project.  Move into that folder.
+
+
+## What's in a repo? ##
+
+If you list the contents of the new folder, you should see two files:
+
+* README.md, which contains the project description, and
+* 205-0.txt, which contains the text of "The Blair Walden Project."
+
+These are the "working files" in the repo, which means these are the
+files you will modify.
+
+This folder also contains a hidden sub-folder named `.git`.  In UNIX
+you can see the contents of this folder by typing
+
+    $ ls -a .git
+
+But you don't really need to know what's in there.  Abstractly, a repo
+has three parts:
+
+1.  The working files,
+2.  The object store, which contains the history of the repo, and
+3.  The index, which keeps track of changes you have made.
+
+The object store and the index are stored in `.git`.
+
+Note: when I say "abstractly," that means I lying.  Or, more
+generously, I am giving you a simplified version of reality that has
+enough information to let you get work done without getting buried in
+details.
+
+When you clone a repo, you get a copy of the working files, a copy
+of the object store, and a fresh new index that doesn't have any
+changes in it.
+
+
+## The log ##
+
+Git records every change in the object store.  To see some of the
+history of the repo, type:
+
+    $ git log
+
+You should see something like this:
+
+    commit be9a05aff259387cb42c9e8348c803404d1f73b9
+    Author: Allen Downey <downey@allendowney.com>
+    Date:   Fri Jun 28 15:15:41 2013 -0400
+
+    Adding a new header, fake preface, and tagline
+
+    commit 511af78111f4ff0170b41d20983c34b75ca12435
+    Author: Allen Downey <downey@allendowney.com>
+    Date:   Fri Jun 28 14:33:49 2013 -0400
+
+    Adding Walden
+
+The log is a list of "commits" in reverse chronological order (sort of).
+A commit is a change or set of changes in the working
+files.  Each log entry includes:
+
+1. The commit ID, which is a unique sequence of hexadecimal digits use
+   to identify the commit,
+2. The author of the commit,
+3. The time and date, and
+4. The description of the commit provided by the author, usually explaining
+what changed and, ideally, why.
+
+To see more of the log, press SPACE.  When you want to exit, press `q`.
+
+
+## Get creative ##
+
+The next step is to modify one of the working files.  Use the
+editor of your choice to open `205-0.txt`.  Search for the word
+"Preface" and read the short preface I added to this fake version
+of the book.
+
+_The Blair Walden Project_ is a collaborative writing exercise, so
+you might want to put some thought into your contribution.
+Let's be clear on what this exercise is about:
+
+1.  The premise of the mashup is that Henry David Thoreau moves to
+a cabin in the woods in 1845, which is true, and then
+2.  Disappears, which is not true, and
+3.  A year later his journal is found (also not true), and
+4.  This book is supposed to be the found journal.
+
+So the plan is that we are going to take the actual text of Walden
+and add creepy scary parts, similar to the events in the movie
+The Blair Witch Project.  Got it?
+
+Here are some tips:
+
+*    The "journal" should contain hints about what happened, but never
+be too explicit.
+*    In the first half of the book, keep it subtle.  We can get more
+overt as we go along.
+*     You can jump in anywhere, but it would be best to find a "hook,"
+or a place in the original text where it makes sense to add something
+creepy.
+*	If you can imitate Thoreau's writing style, that's great.  If not,
+at least try to avoid jarring changes in style and obvious
+anachronisms.
+*    If English is not your first language, you can still participate
+in this exercise.  Just do your best!
+*  You can make your contribution as long or as short as you like.
+
+When you are done, you will have the option to make a "pull request";
+that is, you can ask me to include your change as part of my original
+version.  I encourage you to exercise this option.  I will generally
+accept all requests unless the contents are obviously inappropriate.
+
+
+## Commit the change ##
+
+When you modify a working file, Git doesn't know about the change
+until you tell it.  There are two ways to notify Git about a change.
+We will do the simpler one in this chapter, and the slightly more
+complicated on in the next chapter.
+
+Type
+
+    $ git commit -am "Adding a new creepy part."
+
+"Commit" means that you are copying the change into the Object store,
+making it a permanent part of the repo history.
+
+The flags, `a` and `m`, modify the behavior of commit.
+
+* `a` stands for "all" and means that you want to commit all changes
+since the last commit (or since the repo was cloned).
+
+* `m` stands for "message" and means that you are providing the
+commit message on the command line.
+
+If you don't use `m`, Git opens an editor where you can type the
+commit message.
+
+"Commit" is both a verb and a noun.  When you commit, you copy a
+set of changes into the Object store, which creates a new commit.
+
+If you run `git log` again, the top entry should be the new commit
+you just created.
+
+
+## Push ##
+
+The next step is to copy the new commit from your local repo back
+to your repo on GitHub.  Copying a commit from a local copy to a
+remote repo is called a "push", and the command is:
+
+    $ git push <DEST> <SOURCE>
+
+where <DEST> is the remote repo you are pushing to, and <SOURCE>
+is the source of the change.
+
+For <DEST> you can use the same URL you cloned, but it is more
+common to use "origin", which automatically refers to the remote
+repo from which the local repo was cloned.
+
+Usually <SOURCE> is the name of a branch, but since we haven't talked
+about branches yet, I won't explain in detail.  But since we are
+in the simple case where there is only one branch, we can use
+"master" which refers to the commit you just created.
+
+So, to push your change to your repo on GitHub, type:
+
+    $ git push origin master
+
+This is the most common form of the `push` command, and the only
+one we will use for a while.
+
+For many projects, this would be the end of one work cycle.  The
+most common git work flow looks something like this:
+
+1.   Clone a repo.
+2.   Modify working files.
+3.   Commit a set of changes.
+4.   Push the changes back to `origin`.
+5.   Go to step 2.
+
+However, if you want your contribution to The Blair Walden Project
+included in my repo, there is one more step.
+
+
+## Pull request ##
+
+You could try to push your change from your local copy to my repo
+on GitHub, but it would not work because you do not have permission
+to modify my repo.  That's why you created a fork.
+
+However, now that you have pushed the change into _your_ repo, you
+can ask me to pull it into my repo.  Provided that your repo is
+public, I will be able to pull your change, because I can read your
+repo and write mine.
+
+To make a pull request, go back to the home page for your repo
+on GitHub.  
+
+1. Along the right-hand side, click "Pull requests".
+2. On the next page, near the top-left corner, click "New pull request".
+3. GitHub provides a defaults choices for the source and destination that 
+are probably right.  Click "Click to create a pull request for this comparison".
+4. Fill in a title for the pull request, something like "Contributing a new
+creepy part."
+5. Fill in a comment explaining why you think I should accept your pull
+request (this part it optional).
+6. Click "Send pull request".
+
+You will be notified when I accept your pull request, and then you can
+check back to see that your change appears in my repo.
+As I said, I will generally
+accept all requests unless the contents are obviously inappropriate.
+
+One small bit of legalese: by making a pull request, you are making
+a contribution to my project; that is, you are giving me a license
+to include your original material in my collaborative work.
+
+
+## Destroy the local copy ##
+
+
+
 # Git Basics #
 
 If you can read only one chapter to get going with Git, this is it. This chapter covers every basic command you need to do the vast majority of the things you’ll eventually spend your time doing with Git. By the end of the chapter, you should be able to configure and initialize a repository, begin and stop tracking files, and stage and commit changes. We’ll also show you how to set up Git to ignore certain files and file patterns, how to undo mistakes quickly and easily, how to browse the history of your project and view changes between commits, and how to push and pull from remote repositories.

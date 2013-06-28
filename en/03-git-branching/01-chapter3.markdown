@@ -2,32 +2,91 @@
 
 ## Creating a new repo ##
 
-If you log into GitHub, you will see a list of your repositories in the lower right part of the home page.  Click on the green button that says "New Repository".
+If you log into GitHub, you will see a list of your repositories in
+the lower right part of the home page.  Click on the green button that
+says "New Repository".
 
-Give your repo a name.  People use different schemas for project names.  Your project name will appear in URLs, so you should keep it short.  You can't use spaces; most people use hyphens between lower-case works, like-this, but some mash capitalized words together, LikeThis.
+Give your repo a name.  People use different schemas for project
+names.  Your project name will appear in URLs, so you should keep it
+short.  You can't use spaces; most people use hyphens between
+lower-case works, like-this, but some mash capitalized words together,
+LikeThis.
 
-If you are learning to use Git for a particular project, you might as well create a repo for it.  Or if you just want to practice, you can use the silly name github suggests.
+If you are learning to use Git for a particular project, you might as
+well create a repo for it.  Or if you just want to practice, you can
+use the silly name github suggests.
 
-In the description field, write a sentence to describe your project.  You can make the project public or private.  If you are using this book in a class, or with at least one other person, make it public so you can practice sending pull requests to each other.
+In the description field, write a sentence to describe your project.
+You can make the project public or private.  If you are using this
+book in a class, or with at least one other person, make it public so
+you can practice sending pull requests to each other.
 
-Click the button to initialize the repo with a README.  I don't understand why this is not the default.
+Click the button to initialize the repo with a README.  I don't
+understand why this is not the default.
 
-If are planning to use your repo for programming, click on the "Add .gitignore" menu and select the language you are planning to use.  I'll explain what this is about later.
+If are planning to use your repo for programming, click on the "Add
+.gitignore" menu and select the language you are planning to use.
+I'll explain what this is about later.
 
-Click "Create repository".  You will be taken to the home page of the project you just created.
+Click "Create repository".  You will be taken to the home page of the
+project you just created.
 
 
 ## Editing on GitHub ##
 
-The project home page shows the name and project description, a list of files, and the contents of README.md.
+The project home page shows the name and project description, a list
+of files, and the contents of README.md.
 
-For a new project, README.md is usually the only file in the list.  If you click on the blue filename, you will see the detail page for this file.  Click "History" to see a list of commits that have modified this file.  Click "Blame" to see history information in a different format.  And click "Edit" to... you guessed it... edit the file.
+For a new project, README.md is usually the only file in the list.  If
+you click on the blue filename, you will see the detail page for this
+file.  Click "History" to see a list of commits that have modified
+this file.  Click "Blame" to see history information in a different
+format.  And click "Edit" to... you guessed it... edit the file.
 
-The web editor on GitHub is useful for making small changes, but it is not the most common way of modifying a repo.  And it is not particularly safe.  If you are making substantial changes and want to minimize the chance of losing work, I don't recommend using the web editor.
+The web editor on GitHub is useful for making small changes, but it is
+not the most common way of modifying a repo.  And it is not
+particularly safe.  If you are making substantial changes and want to
+minimize the chance of losing work, I don't recommend using the web
+editor.
 
-Anyway, if you want to add more information to README.md, you can.  By the way, "md" stands for Markdown, which is a markup language you can use to format the contents of README.md.  This book is written in Markdown.
+Anyway, if you want to add more information to README.md, you can.  By
+the way, "md" stands for Markdown, which is a markup language you can
+use to format the contents of README.md.  This book is written in
+Markdown.
 
-When you are done editing, you can add comments in the "Commit summary" and "Extended description" fields, and then hit "Commit Changes".  The commit summary usually describes what was changed; the description explains why.
+When you are done editing, you can add comments in the "Commit
+summary" and "Extended description" fields, and then hit "Commit
+Changes".  The commit summary usually describes what was changed; the
+description explains why.
+
+
+## Cloning ##
+
+To copy this repo to your local computer, find the clone URL on the
+project page and copy it.
+
+Open a terminal and move to a directory where you want to keep the
+repo and type
+
+     $ git clone <URL>
+
+where <URL> is the clone URL you copied.  You should see something
+like this:
+
+     Cloning into 'blair-walden-project'...
+     remote: Counting objects: 6, done.
+     remote: Compressing objects: 100% (4/4), done.
+     remote: Total 6 (delta 1), reused 0 (delta 0)
+
+Of course, the name of the project and the number of objects are
+probably different.
+
+If you list the contents of the current folder, you should see a new
+folder with the same name as your project.
+
+
+## Adding files ##
+
 
 
 # Git Branching #
