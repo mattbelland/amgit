@@ -1,3 +1,24 @@
+#Use case 2#
+
+## Creating a new repo ##
+
+If you log into GitHub, you will see a list of your repositories in the lower right part of the home page.  Click on the green button that says "New Repository".
+
+Give your repo a name.  People use different schemas for project names.  Your project name will appear in URLs, so you should keep it short.  You can't use spaces; most people use hyphens between lower-case works, like-this, but some mash capitalized words together, LikeThis.
+
+If you are learning to use Git for a particular project, you might as well create a repo for it.  Or if you just want to practice, you can use the silly name github suggests.
+
+In the description field, write a sentence to describe your project.  You can make the project public or private.  If you are using this book in a class, or with at least one other person, make it public so you can practice sending pull requests to each other.
+
+Click the button to initialize the repo with a README.  I don't understand why this is not the default.
+
+If are planning to use your repo for programming, click on the "Add .gitignore" menu and select the language you are planning to use.  I'll explain what this is about later.
+
+Click "Create repository".  You will be taken to the home page of the project you just created.
+
+
+
+
 # Git Branching #
 
 Nearly every VCS has some form of branching support. Branching means you diverge from the main line of development and continue to do work without messing with that main line. In many VCS tools, this is a somewhat expensive process, often requiring you to create a new copy of your source code directory, which can take a long time for large projects.
