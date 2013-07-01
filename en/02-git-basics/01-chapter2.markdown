@@ -1,4 +1,4 @@
-# Use case 1 #
+# Chapter 1 #
 
 In each chapter I will walk you through a use case for Git.  In this chapter
 we will make a copy of an existing repository, make a change, and add the
