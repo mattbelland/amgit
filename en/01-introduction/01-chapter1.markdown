@@ -2,9 +2,9 @@
 
 ## Preface ##
 
-This is a modified version of Pro Git.  The original version, by Scott Chacon, is available from http://git-scm.com/book
+This is a modified version of Pro Git.  The original version, by Scott Chacon, is available from http://git-scm.com/book.
 
-This version, by Allen B. Downey, is available from https://github.com/AllenDowney/progit.
+This version, by Allen B. Downey, is available from https://github.com/AllenDowney/amgit.
 
 Both books are under the Creative Commons Attribution Non Commercial Share Alike 3.0 license, which you can read at
 http://creativecommons.org/licenses/by-nc-sa/3.0/
