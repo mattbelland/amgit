@@ -37,15 +37,60 @@ me to delete the file when I am done.
 
 Type a few lines of text in the edit window.  Here's mine:
 
+    Shopping list:
+    1. Milk
+    2. Chocolate frosted sugar bombs
+
+Below the edit window you'll see the Commit summary, which GitHub
+has filled in, and the Extended Description, which you can fill
+in.
+
+Press "Commit new file".  GitHub takes you back to the project home
+page where you should see the new file in the file list.
+
+## Pull the new file ##
+
+At this point the new file is in the remote repo (on GitHub) but
+not in your local copy.  To pull it into the local copy, open
+a terminal, `cd` into the local repo, and type:
+
+    $ git pull
+
+Git responds with the usual babble:
+
+    remote: Counting objects: 4, done.
+    remote: Compressing objects: 100% (3/3), done.
+    remote: Total 3 (delta 1), reused 0 (delta 0)
+    Unpacking objects: 100% (3/3), done.
+    From https://github.com/AllenDowney/clink
+       c2a760a..6c851d1  master     -> origin/master
+    Updating c2a760a..6c851d1
+    Fast-forward
+     delete_me.txt | 3 +++
+     1 file changed, 3 insertions(+)
+     create mode 100644 delete_me.txt
+
+The upshot is that any changes in the remote repo have been copied
+into the local repo.
+
+Before we go on, run 
+
+    $ git status
+
+To make sure there are no changes in the local repo that are not
+in the remote.  You should get
+
+    # On branch master
+    nothing to commit, working directory clean
+
 
 
 ## Editing on GitHub ##
 
-The project home page shows the name and project description, a list
-of files, and the contents of README.md.
-
-For a new project, README.md is usually the only file in the list.  If
-you click on the blue filename, you will see the detail page for this
+Back on GitHub, go to the project home page and click on the new
+file.
+ 
+You will see the detail page for this
 file.  Click "History" to see a list of commits that have modified
 this file.  Click "Blame" to see history information in a different
 format.  And click "Edit" to... you guessed it... edit the file.
@@ -56,18 +101,137 @@ particularly safe.  If you are making substantial changes and want to
 minimize the chance of losing work, I don't recommend using the web
 editor.
 
-Anyway, if you want to add more information to README.md, you can.  By
-the way, "md" stands for Markdown, which is a markup language you can
-use to format the contents of README.md.  This book is written in
-Markdown.
+Anyway, go ahead and change one line of the file.  For example,
+I changed "Milk" to "Skim Milk."
 
-When you are done editing, you can add comments in the "Commit
-summary" and "Extended description" fields, and then hit "Commit
-Changes".  The commit summary usually describes what was changed; the
-description explains why.
+Press "Commit changes."  Now, again, there is a commit in the remote
+repo that is not in the local copy.  But don't pull it yet!
 
 
-#Pull#
+## Editing the local copy ##
 
-#Merge#
+Go back to your local copy and use the editor of your choice to edit
+the same file, but don't edit the same line.  In my example, I added
+a third item, "Kale", to the shopping list.
+
+Now that you have changed a working file, you can stage it by adding
+the file:
+
+    $ git add delete_me.txt
+
+And then commit the change.
+
+    $ git commit -m "Adding kale to list"
+    [master 7061131] Adding kale to list
+     1 file changed, 1 insertion(+)
+
+Or you could add and commit the change at the same time:
+
+    $ git commit -am "Adding kale to list"
+
+Now you have a commit in the local repo that is not in the remote
+repo.  Normally you would push the change to the remote, but here's
+what happens if you try:
+
+    $ git push origin master
+    To https://github.com/AllenDowney/clink
+     ! [rejected]        master -> master (non-fast-forward)
+    error: failed to push some refs to 'https://github.com/AllenDowney/clink'
+    hint: Updates were rejected because the tip of your current branch is behind
+    hint: its remote counterpart. Merge the remote changes (e.g. 'git pull')
+    hint: before pushing again.
+    hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+As the error message says, your push was rejected because your local
+repo is "behind" it remote.  That is, there is a commit in the remote
+that is not in the local repo.  You have to pull the change from the
+remote before you can push your change.
+
+
+
+
+## Push you, pull me ##
+
+So let's do what we're told:
+
+    $ git pull
+
+This time git opens an editor and asks you to provide a message
+explaining "why this merge is necessary."  It provides a default message
+which you can use.  Apparently "because you told me to" is not an
+acceptable explanation.
+
+When you close the editor, Git reports:
+
+    From https://github.com/AllenDowney/clink
+       6c851d1..019c5db  master     -> origin/master
+    Auto-merging delete_me.txt
+    Merge made by the 'recursive' strategy.
+     delete_me.txt | 2 +-
+     1 file changed, 1 insertion(+), 1 deletion(-)
+
+Which indicates that Git has merged the two versions of the file.
+If you had the file open in an editor, you might have to reopen
+it to see the change.  If things went according to plan, you should
+see:
+
+    Shopping list:
+    1. Skim milk
+    2. Chocolate frosted sugar bombs
+    3. Kale
+
+Now the local copy contains both changes (adding "Skim" and "Kale").
+But we're not done because the local changes have not been pushed
+to the remote yet.  Now if you run
+
+    $ git push origin master
+
+It succeeds, and the local and remote repos are back in sync.
+
+
+## Merge conflicts ##
+
+The previous example was one of the good cases where Git is able
+to merge changes automatically.  If two people modify the same file,
+Git can _usually_ merge them unless there are conflicting changes
+to the same part of the file.
+
+To see how that goes, try the following:
+
+1.  Use the web interface to change "Chocolate frosted sugar bombs"
+to "Organic shredded quinoa".
+2.  In your local repo, change "Chocolate frosted sugar bombs"
+to "Chocolate frosted sugar bombs, with marshmallows".  But don't
+commit the change yet.
+3.  In the local repo, run `git pull`.
+
+You should see a message like this:
+
+    From https://github.com/AllenDowney/clink
+       3fede59..dacb3ff  master     -> origin/master
+    Updating 3fede59..dacb3ff
+    error: Your local changes to the following files would be overwritten by merge:
+	delete_me.txt
+    Please, commit your changes or stash them before you can merge.
+
+Git is letting you know that if you pull the change from the repo it
+will clobber the change you made in a working file.
+
+It suggests you should either commit or "stash" the local change.
+Since we don't know about "stash" yet, let's commit.
+
+    $ git commit -am "Adding marshmallows"
+
+And try pulling again:
+
+    $ git pull
+
+Git reports
+
+    Auto-merging delete_me.txt
+    CONFLICT (content): Merge conflict in delete_me.txt
+    Automatic merge failed; fix conflicts and then commit the result.
+
+As expected, Git can't merge the two files because there are two
+changes to the same line and Git doesn't know which to keep.
 
