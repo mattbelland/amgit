@@ -1,7 +1,9 @@
-# Chapter 1 #
+# The first use case #
 
-In each chapter I will walk you through a use case for Git.  In this chapter
-we will make a copy of an existing repository, make a change, and add the
+## Outline ##
+
+In each chapter I walk you through a use case for Git.  In this chapter
+we make a copy of an existing repository, make a change, and add the
 change back to the repository.  Here are the steps.
 
 1.   Create an account on GitHub.
@@ -134,7 +136,7 @@ your local copy of the repo, and type:
 
      $ git clone <URL>
 
-where <URL> is the URL you copied from the project page.  It should
+where `<URL>` is the URL you copied from the project page.  It should
 look like this
 
      $ git clone <yourusername>/blair-walden-project
@@ -354,14 +356,14 @@ remote repo is called a "push", and the command is:
 
     $ git push <DEST> <SOURCE>
 
-where <DEST> is the remote repo you are pushing to, and <SOURCE>
+where `<DEST>` is the remote repo you are pushing to, and `<SOURCE>`
 is the source of the change.
 
-For <DEST> you can use the same URL you cloned, but it is more
+For `<DEST>` you can use the same URL you cloned, but it is more
 common to use `origin`, which automatically refers to the remote
 repo from which the local repo was cloned.
 
-Usually <SOURCE> is the name of a branch, but since we haven't talked
+Usually `<SOURCE>` is the name of a branch, but since we haven't talked
 about branches yet, I won't explain in detail.
 In the simple case where there is only one branch, we can use
 `master` which refers to the commit you just created.

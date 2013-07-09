@@ -1,6 +1,41 @@
-#Chapter 4# 
+#The third use case# 
+
+## Outline ##
+
+One of the best things about Git is that
+it is easy for several people to work on the same project at the
+same time.  One the other hand, one of the worst things about
+Git is that it is easy for several people working on the same
+project to really mess things up.
+
+In this chapter we walk through a use case that simulates people
+editing the same file at the same time.  We'll see what goes wrong
+and how to fix it.
+
+Here are the steps:
+
+1.   We'll use the Github web interface to create a new file.
+
+if you have several people working on the same project, it is easy
+
 
 ## Adding files on Github ##
+
+Using the Github we interface, you can create and edit files on the
+remote repository without cloning a local copy.
+
+If you want to follow along with this example, create a new project
+or choose an existing project, and clone a local copy.  Now you have
+two copies of the repo, one on GitHub and one on your computer.
+
+Go to the project home page on GitHub.  Above the list of files you
+should see an icon that looks like a sheet of paper with a folded corner
+and a big plus sign.  Press it to add a new file to the project.
+
+For my example, I'll call the file `delete_me.txt`, to remind
+me to delete the file when I am done.
+
+Type a few lines of text in the edit window.  Here's mine:
 
 
 

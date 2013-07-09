@@ -1,6 +1,6 @@
-#Chapter 3#
+# The second use case #
 
-## Another use case ##
+## Outline ##
 
 This chapter presents another use case for version control with Git.
 
