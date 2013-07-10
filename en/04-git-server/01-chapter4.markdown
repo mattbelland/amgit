@@ -9,24 +9,27 @@ Git is that it is easy for several people working on the same
 project to really mess things up.
 
 In this chapter we walk through a use case that simulates people
-editing the same file at the same time.  We'll see what goes wrong
+editing the same file at the same time.  We'll see what can go wrong
 and how to fix it.
 
 Here are the steps:
 
-1.   We'll use the Github web interface to create a new file.
-
-if you have several people working on the same project, it is easy
-
-
-## Adding files on Github ##
-
-Using the Github we interface, you can create and edit files on the
-remote repository without cloning a local copy.
+1. We'll use the Github web interface to create a new file in the remote repo.
+2. Then we'll pull the change from the remote to the local repo.
+3. Next we'll edit the file on both the local and remote repo and then merge the changes automatically.
+4. We'll make simultaneous edits that can't be merged automatically.
+5. Finally, we'll resolve the conflict. 
 
 If you want to follow along with this example, create a new project
 or choose an existing project, and clone a local copy.  Now you have
 two copies of the repo, one on GitHub and one on your computer.
+
+
+
+## Adding files on Github ##
+
+Using the Github web interface, you can create and edit files on the
+remote repository.
 
 Go to the project home page on GitHub.  Above the list of files you
 should see an icon that looks like a sheet of paper with a folded corner
@@ -47,6 +50,7 @@ in.
 
 Press "Commit new file".  GitHub takes you back to the project home
 page where you should see the new file in the file list.
+
 
 ## Pull the new file ##
 
@@ -70,7 +74,7 @@ Git responds with the usual babble:
      1 file changed, 3 insertions(+)
      create mode 100644 delete_me.txt
 
-The upshot is that any changes in the remote repo have been copied
+The upshot is that the changes in the remote repo have been copied
 into the local repo.
 
 Before we go on, run 
@@ -87,10 +91,11 @@ in the remote.  You should get
 
 ## Editing on GitHub ##
 
-Back on GitHub, go to the project home page and click on the new
-file.
+Back on GitHub, go to the project home page and click `delete_me.txt`,
+or whatever you named the file
+you just created.
  
-You will see the detail page for this
+You should get the detail page for the
 file.  Click "History" to see a list of commits that have modified
 this file.  Click "Blame" to see history information in a different
 format.  And click "Edit" to... you guessed it... edit the file.
@@ -102,7 +107,7 @@ minimize the chance of losing work, I don't recommend using the web
 editor.
 
 Anyway, go ahead and change one line of the file.  For example,
-I changed "Milk" to "Skim Milk."
+I changed "Milk" to "Skim milk."
 
 Press "Commit changes."  Now, again, there is a commit in the remote
 repo that is not in the local copy.  But don't pull it yet!
@@ -119,7 +124,7 @@ the file:
 
     $ git add delete_me.txt
 
-And then commit the change.
+Then commit the change.
 
     $ git commit -m "Adding kale to list"
     [master 7061131] Adding kale to list
@@ -143,11 +148,9 @@ what happens if you try:
     hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 
 As the error message says, your push was rejected because your local
-repo is "behind" it remote.  That is, there is a commit in the remote
+repo is "behind" its remote.  That is, there is a commit in the remote
 that is not in the local repo.  You have to pull the change from the
 remote before you can push your change.
-
-
 
 
 ## Push you, pull me ##
@@ -158,8 +161,8 @@ So let's do what we're told:
 
 This time git opens an editor and asks you to provide a message
 explaining "why this merge is necessary."  It provides a default message
-which you can use.  Apparently "because you told me to" is not an
-acceptable explanation.
+which you can use.  Apparently "because you told me to" is not
+sufficient.
 
 When you close the editor, Git reports:
 
@@ -170,10 +173,12 @@ When you close the editor, Git reports:
      delete_me.txt | 2 +-
      1 file changed, 1 insertion(+), 1 deletion(-)
 
-Which indicates that Git has merged the two versions of the file.
-If you had the file open in an editor, you might have to reopen
-it to see the change.  If things went according to plan, you should
-see:
+Which indicates that Git has automatically merged the two versions of
+the file.  
+
+Open the file.  Or if you had the file open in an editor, reload
+it to see the change.  If things went according to plan, you
+should see:
 
     Shopping list:
     1. Skim milk
@@ -181,12 +186,14 @@ see:
     3. Kale
 
 Now the local copy contains both changes (adding "Skim" and "Kale").
+
 But we're not done because the local changes have not been pushed
-to the remote yet.  Now if you run
+to the remote yet.  If you run
 
     $ git push origin master
 
-It succeeds, and the local and remote repos are back in sync.
+it should succeed.  Now both repos have the same set of commits,
+so neither is behind the other.  They are back in sync.
 
 
 ## Merge conflicts ##
@@ -199,7 +206,7 @@ to the same part of the file.
 To see how that goes, try the following:
 
 1.  Use the web interface to change "Chocolate frosted sugar bombs"
-to "Organic shredded quinoa".
+to "Organic shredded quinoa", and commit the change.
 2.  In your local repo, change "Chocolate frosted sugar bombs"
 to "Chocolate frosted sugar bombs, with marshmallows".  But don't
 commit the change yet.
@@ -217,7 +224,7 @@ You should see a message like this:
 Git is letting you know that if you pull the change from the repo it
 will clobber the change you made in a working file.
 
-It suggests you should either commit or "stash" the local change.
+It suggests you should either commit or stash the local change.
 Since we don't know about "stash" yet, let's commit.
 
     $ git commit -am "Adding marshmallows"
@@ -233,5 +240,8 @@ Git reports
     Automatic merge failed; fix conflicts and then commit the result.
 
 As expected, Git can't merge the two files because there are two
-changes to the same line and Git doesn't know which to keep.
+changes to the same line and Git doesn't know which to keep,
+the quinoa or the marshmallows.
+
+
 
