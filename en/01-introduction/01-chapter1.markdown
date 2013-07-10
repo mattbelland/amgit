@@ -61,11 +61,11 @@ If you have it, you will see a help message and you can skip to the next section
 
 If you’re on Fedora, you can use yum:
 
-	$ yum install git-core
+	$ yum install git-core git-gui
 
 If you’re on a Debian-based distribution like Ubuntu, try apt-get:
 
-	$ apt-get install git-core
+	$ apt-get install git-core git-gui
 	
 
 ### Installing on Mac ###
