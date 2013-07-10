@@ -14,11 +14,12 @@ and how to fix it.
 
 Here are the steps:
 
-1. We'll use the Github web interface to create a new file in the remote repo.
-2. Then we'll pull the change from the remote to the local repo.
-3. Next we'll edit the file on both the local and remote repo and then merge the changes automatically.
-4. We'll make simultaneous edits that can't be merged automatically.
-5. Finally, we'll resolve the conflict. 
+1. Use the Github web interface to create a new file in the remote repo.
+2. Pull the change from the remote to the local repo.
+3. Edit the file on both the local and remote repo and then merge the changes automatically.
+4. Make simultaneous edits that can't be merged automatically.
+5. Resolve the conflict. 
+6. Delete the file.
 
 If you want to follow along with this example, create a new project
 or choose an existing project, and clone a local copy.  Now you have
@@ -243,5 +244,62 @@ As expected, Git can't merge the two files because there are two
 changes to the same line and Git doesn't know which to keep,
 the quinoa or the marshmallows.
 
+If you run `git status`, you will see which file or files are
+in conflict.
+
+If you edit the conflicted file, you'll see something like this:
+
+    Shopping list:
+    1. Skim milk
+    <<<<<<< HEAD
+    2. Chocolate frosted sugar bombs with marshmallows
+    =======
+    2. Organic shredded quinoa
+    >>>>>>> dacb3ffc4370b9f6983e1db4101ae738bbcafa36
+    3. Kale
+
+The file contains both versions of the conflicted line, and 
+markers
+indicating the source of the conflicting changes.  `HEAD` refers
+to the most recent commit in the local repo.  The long
+string of letters and numbers, starting with `dacb`, is the
+unique identifier of the commit on the remote.
+
+You can resolve the conflict by editing the file directly, choosing
+which version to keep (the marshmallows, of course), and deleting
+the conflict markers.
+
+Or if you run
+
+    $ git mergetool
+
+Git opens the conflicted file using one of many file merge tools,
+special editors that display conflicts in a readable form, provides
+a GUI for choosing which version to keep, and writes the merged
+file.
+
+Once you have saved the merged file, add and commit the change,
+and push it to origin:
+
+    $ git commit -am "Merging delete_me.txt"
+    $ git push origin master
 
 
+## Deleting files ##
+
+I called the file `delete_me.txt` for a reason.  Here's how to
+delete a file:
+
+    $ git rm delete_me.txt
+    rm 'delete_me.txt'
+
+And then, as usual, commit and push the change:
+
+    $ git commit -am "Deleting delete_me.txt"
+    [master 6554cbb] Deleting delete_me.txt
+     1 file changed, 4 deletions(-)
+     delete mode 100644 delete_me.txt
+
+    $ git push origin master
+
+And, we're done.
