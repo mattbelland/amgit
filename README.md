@@ -7,24 +7,14 @@ _Am Git_, by Allen B. Downey, is a modified version of _Pro Git_ by Scott Chabon
 Like the original, it is licensed under
 the Creative Commons Attribution-Non Commercial-Share Alike 3.0 license.
 
+I have modified only the first four chapters:
 
-# Making Ebooks
+[Chapter 1: Version control](https://github.com/AllenDowney/amgit/blob/master/en/01-introduction/01-chapter1.markdown)
 
-On Fedora (16 and later) you can run something like this::
+[Chapter 2: The first use case](https://github.com/AllenDowney/amgit/blob/master/en/02-git-basics/01-chapter2.markdown)
 
-    $ yum install ruby calibre rubygems ruby-devel rubygem-ruby-debug rubygem-rdiscount
-    $ makeebooks en  # will produce a mobi
+[Chapter 3: The second use case](https://github.com/AllenDowney/amgit/blob/master/en/03-git-branching/01-chapter3.markdown)
 
-On MacOS you can do like this::
-	
-1. INSTALL ruby and rubygems
-2. `$ gem install rdiscount`
-3. DOWNLOAD Calibre for MacOS and install command line tools
-4. `$ makeebooks zh` #will produce a mobi
+[Chapter 4: The third use case](https://github.com/AllenDowney/amgit/blob/master/en/04-git-server/01-chapter4.markdown)
 
-On Ubuntu you can run something like this:
-
-    $ sudo apt-get install pandoc texlive-xetex
-
-    $ makepdfs en
-
+In addition, I wrote [this guide to resolving merge conflicts with minimal pain](http://allendowney.github.io/amgit/conflict).
