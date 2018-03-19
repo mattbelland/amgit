@@ -32,14 +32,14 @@ As you work on the project over a few weeks, or months, what are some of the pro
 *	You probably want different people to have different access to your files.  Collaborators should be able to read and edit.  You might want some other people to read, but not edit.  And you might want to prevent others from reading, or you might want to make it easy for others to discover your work.
 *	Finally, there is always the possibility that your hard drive crashes, or your computer is damaged or stolen, and you lose all your data.
 
-Version control systems (VCS) addresses address all of these problems.  A VCS provides tools that allow you to store your files in a named repository.  A repository is a collection of files, similar to a folder on a hard drive, but with additional capabilities.   In particular, 
+Version control systems (VCS) address all of these problems.  A VCS provides tools that allow you to store your files in a named repository.  A repository is a collection of files, similar to a folder on a hard drive, but with additional capabilities.   In particular, 
 
 *	A repository keeps track of the history of its files, so it is easy to see who changed what, and when, and why.
 *	It is easy to see older versions of the files, and compare any two versions, and if you mess something up, you can go back to an older version.
 *	It is easy to make copies of a repository, so everyone collaborating on a project can have their own copy.
 *	You can keep a copy at a remote location, on a professionally-maintained server, so there is very little chance of losing your data.
 *	And when people collaborate on a project, the repository helps them coordinate their work.  They can make and test changes independently, and then move changes from one copy to another in an organized way.
-*	Version controls systems provide servers that give you control over who can read and write your files.  You can make them as secure, or as public, as you want.
+*	Version control systems provide servers that give you control over who can read and write your files.  You can make them as secure, or as public, as you want.
 *	Some version control systems provide additional services that are not strictly part of VCS, but that help projects run smoothly; for example, a wiki for documentation, a code review system, or an issue tracker (which is like a glorified to-do list).   
 
 There are several popular version control systems.  I won't go into their pros and cons.  I am only going to tell you about one of them, Git.  To show you how to use it, I will walk you through several common use cases.  But before you can use Git, you have to install it.
